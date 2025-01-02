@@ -44,3 +44,5 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 
 vim.opt.swapfile = false
+
+vim.o.sessionoptions = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions'
