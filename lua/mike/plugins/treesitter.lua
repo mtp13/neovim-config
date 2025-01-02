@@ -1,14 +1,48 @@
-return { -- Highlight, edit, and navigate code
+return {
   'nvim-treesitter/nvim-treesitter',
+  event = { 'BufReadPre', 'BufNewFile' },
   build = ':TSUpdate',
-  main = 'nvim-treesitter.configs',
-  opts = {
-    ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
-    auto_install = true,
-    highlight = {
-      enable = true,
-      additional_vim_regex_highlighting = { 'ruby' },
-    },
-    indent = { enable = true, disable = { 'ruby' } },
+  dependencies = {
+    'windwp/nvim-ts-autotag',
   },
+  config = function()
+    local treesitter = require 'nvim-treesitter.configs'
+
+    ---@diagnostic disable-next-line: missing-fields
+    treesitter.setup { -- enable syntax highlighting
+      highlight = {
+        enable = true,
+      },
+      indent = { enable = true },
+      autotag = {
+        enable = true,
+      },
+      ensure_installed = {
+        'json',
+        'javascript',
+        'typescript',
+        'tsx',
+        'yaml',
+        'html',
+        'css',
+        'markdown',
+        'markdown_inline',
+        'bash',
+        'lua',
+        'vim',
+        'gitignore',
+        'vimdoc',
+        'c',
+      },
+      incremental_selection = {
+        enable = true,
+        keymaps = {
+          init_selection = '<C-space>',
+          node_incremental = '<C-space>',
+          scope_incremental = false,
+          node_decremental = '<bs>',
+        },
+      },
+    }
+  end,
 }
