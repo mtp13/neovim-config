@@ -34,6 +34,9 @@ return {
             require('telescope.themes').get_dropdown(),
           },
         },
+        defaults = {
+          path_display = { 'smart' },
+        },
       }
 
       pcall(require('telescope').load_extension, 'fzf')
